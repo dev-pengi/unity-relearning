@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement: MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     private CharacterController controller;
@@ -26,7 +26,6 @@ public class PlayerMovement: MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
     }
-
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -40,9 +39,9 @@ public class PlayerMovement: MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
+        move.y = 0f;
 
-
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(speed * Time.deltaTime * move);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -59,6 +58,6 @@ public class PlayerMovement: MonoBehaviour
             isMoving = false;
 
         lastPosition = gameObject.transform.position;
-
     }
+
 }

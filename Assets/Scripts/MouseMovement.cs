@@ -5,6 +5,8 @@ public class MouseMovement : MonoBehaviour
 
     public float mouseSensitivity = 500f;
 
+    public Transform playerBody;
+
     private float xRotation = 0f;
     private float yRotation = 0f;
 
@@ -25,8 +27,8 @@ public class MouseMovement : MonoBehaviour
 
         xRotation = Mathf.Clamp((xRotation - mouseY), topClamp, bottomClamp);
 
-        yRotation += mouseX;
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        playerBody.Rotate(Vector3.up * mouseX);
     }
 }
